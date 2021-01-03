@@ -26,10 +26,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- <?php foreach ($data as $key => $value) : ?>
+                        <?php foreach ($data as $key => $value) : ?>
                             <tr>
-                                <td class="mdl-data-table__cell--non-numeric"></td>
-                                <td></td>
+                                <td class="mdl-data-table__cell--non-numeric"><?= $value['id']; ?></td>
+                                <td><?= $value['Judul_buku']; ?></td>
                                 <td><?= $value['pengarang']; ?></td>
                                 <td><?= $value['tahun_terbit']; ?></td>
                                 <td>
@@ -37,7 +37,7 @@
                                     <a href="<?= base_url(); ?>Amin/edit_data/" type="buttton" class="btn"><i class='far fa-trash-alt' style='color:red'></i></a>
                                 </td>
                             </tr>
-                        <?php endforeach; ?> -->
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

@@ -31,30 +31,9 @@
             <!-- Data Tables and Pagination -->
             <script src="<?php echo base_url('assets/') ?>template-admin/vendor/datatables/jquery.dataTables.min.js"></script>
             <script src="<?php echo base_url('assets/') ?>template-admin/vendor/datatables/dataTables.bootstrap4.js"></script>
-            <!-- <script type="text/javascript">
+            <script type="text/javascript">
                 $(document).ready(function() {
                     $('#Table').DataTable();
-                });
-            </script> -->
-            <script>
-                const url = "<?php echo base_url().'Admin/getData' ?>"
-                $(document).ready(function() {
-                    $('#Table').DataTable({
-                        "ajax": url,
-                        "columns": [{
-                                "data": "id"
-                            },
-                            {
-                                "data": "Judul_buku"
-                            },
-                            {
-                                "data": "pengarang"
-                            },
-                            {
-                                "data": "tahun_terbit"
-                            }
-                        ]
-                    });
                 });
             </script>
             </body>
