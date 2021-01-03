@@ -26,10 +26,22 @@ class Crud extends CI_Model
         return $result['data'];
     }
 
-    // Add a new item
-    public function add()
+    public function getById($id)
     {
-        
+        $response = $this->_client->request('GET', '?id=' . $id);
+        $result = json_decode($response->getBody()->getContents(), true);
+        return $result['data'];
+    }
+
+    // Add a new item
+    public function add($data)
+    {
+        $response = $this->_client->request('POST', 'book', [
+            'form_params' => $data
+        ]);
+
+        $result = json_decode($response->getBody()->getContents(), true);
+        return $result;
     }
 
     //Update one item

@@ -23,12 +23,55 @@ class Admin extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Crud');
+		$this->load->model('Crud', 'action');
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+		$this->load->library('session');
 	}
 	public function index()
 	{
-		$page =	$this->input->post('page');
-		$data['data'] = $this->Crud->read(1);
-		$this->load->view('home1', $data);
+		$data['data'] = $this->action->read();
+		$this->load->view('header');
+		$this->load->view('home', $data);
+		$this->load->view('footer');
+	}
+	public function add_data()
+	{
+		$this->form_validation->set_rules('judulBuku', 'judulBuku', 'required');
+		$this->form_validation->set_rules('pengarang', 'pengarang', 'required');
+		$this->form_validation->set_rules('tahunTerbit', 'tahunTerbit', 'required');
+
+		$data = [
+			"judul_buku" => $this->input->post('judulBuku'),
+			"pengarang" => $this->input->post('pengarang'),
+			"tahun_terbit" => $this->input->post('tahunTerbit')
+		];
+		$this->action->add($data);
+		$this->session->set_flashdata('message', '<div class="alert alert-info" role="alert">
+					Data Berhasil Ditambahkan
+				  </div>');
+		redirect('Admin');
+		# code...
+	}
+
+	public function edit_data($id)
+	{
+		$data['data'] = $this->action->getById($id);
+
+		$this->form_validation->set_rules('judulBuku', 'judulBuku', 'required');
+		$this->form_validation->set_rules('pengarang', 'pengarang', 'required');
+		$this->form_validation->set_rules('tahunTerbit', 'tahunTerbit', 'required');
+
+		if ($this->form_validation->run() == false) {
+			$this->load->view('header');
+			$this->load->view('edit', $data);
+			$this->load->view('footer');
+		} else {
+			$this->action->update();
+			$this->session->set_flashdata('flash', 'Diubah');
+			redirect('Salon/data_salon');
+		}
+		redirect('Admin');
+		# code...
 	}
 }
